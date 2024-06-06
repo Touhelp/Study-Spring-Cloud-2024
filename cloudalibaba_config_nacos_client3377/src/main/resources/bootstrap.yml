@@ -1,0 +1,17 @@
+# 配置路径将微服务注册到Nacos里面
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 # Nacos服务注册中心地址，即指定这个微服务的服务注册中心
+      config:
+        server-addr: localhost:8848 # 指定Nacos作为配置中心地址
+        file-extension: yaml # 指定从Nacos读取的文件格式为yaml
+        group: PROD_GROUP # 指定Nacos中的组名
+        namespace: ee01bd2a-3258-4d1f-a2e1-a515cae15d0e # 指定Nacos中的命名空间id
+
+# nacos端配置文件DataId的命名规则是：
+# ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+# 本案例的DataID是:nacos-config-client-dev.yaml

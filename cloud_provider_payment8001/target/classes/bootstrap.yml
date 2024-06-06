@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: cloud-payment-service
+    ####Spring Cloud Consul for Service Discovery
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+      config:
+        profile-separator: '-' # default value is ","，we update '-'，这里配置的是Consul的文件夹命名的分隔符，主要是要识别最后一个分隔符后面的单词作为环境标识符
+        format: YAML # 规定Spring Cloud程序用什么解析器解析从consul拉取过来的数据
+        watch:
+          wait-time: 1 # 当Consul配置信息发生改变的时候，通知微服务来拉取
+
+# config/cloud-payment-service/data
+#       /cloud-payment-service-dev/data
+#       /cloud-payment-service-prod/data
